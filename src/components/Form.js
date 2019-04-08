@@ -1,13 +1,34 @@
 import React, { Component } from "react";
 
 class Form extends Component {
+  //refs son para leer los valores de los campos de un formulario
   marcaRef = React.createRef();
   yearRef = React.createRef();
   planBasicoRef = React.createRef();
   planCopmletoRef = React.createRef();
+
   handleSubmit = e => {
     e.preventDefault();
-    console.log(this.marcaRef.current.value);
+
+    //leer plan
+    const plan = this.planBasicoRef.current.checked ? "basico" : "completo";
+
+    //Obtener los datos
+    //console.log(this.marcaRef.current.value);
+
+    // crear el objeto
+    const infoAuto = {
+      marca: this.marcaRef.current.value,
+      year: this.yearRef.current.value,
+      plan: plan
+    };
+    //console.log(infoAuto);
+
+    //enviar al componente principal
+    this.props.cotizarSeguro(infoAuto);
+
+    //Resetear el formulario
+    //e.currentTarget.reset();
   };
   render() {
     return (
